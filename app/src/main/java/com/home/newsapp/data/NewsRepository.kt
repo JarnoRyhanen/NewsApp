@@ -3,7 +3,6 @@ package com.home.newsapp.data
 import androidx.room.withTransaction
 import com.home.newsapp.api.NewsApi
 import com.home.newsapp.util.networkBoundResource
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
@@ -17,7 +16,6 @@ class NewsRepository @Inject constructor(
                dao.getAllNews()
        },
        fetch = {
-               delay(2000)
            api.getNews()
        },
        saveFetchResult = { listOfNews ->

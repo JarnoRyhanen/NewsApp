@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.home.newsapp.data.News
 import com.home.newsapp.databinding.RecyclerViewItemNewsBinding
 
-class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsComparator()) {
+class NewsAdapter(private val listener: OnItemClickListener) : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding =
@@ -24,19 +25,38 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsComparator
         }
     }
 
-    class NewsViewHolder(private val binding: RecyclerViewItemNewsBinding) :
+    inner class NewsViewHolder(private val binding: RecyclerViewItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val news = getItem(position)
+                        listener.onItemClick(news)
+                    }
+                }
+
+            }
+        }
+
         fun bind(news: News) {
             binding.apply {
                 Glide.with(itemView)
                     .load(news.imageUrl)
                     .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .into(recyclerViewImage)
 
                 recyclerViewTitle.text = news.title
                 recyclerViewNewsSite.text = news.newsSite
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(news: News)
     }
 
     class NewsComparator : DiffUtil.ItemCallback<News>() {

@@ -1,27 +1,23 @@
 package com.home.newsapp.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.app.Application
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.home.newsapp.api.NewsApi
+import androidx.lifecycle.asLiveData
 import com.home.newsapp.data.News
+import com.home.newsapp.data.NewsRepository
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    api: NewsApi
+    repository: NewsRepository,
 ) : ViewModel() {
 
-    private val newsLiveData = MutableLiveData<List<News>>()
-    val news: LiveData<List<News>> = newsLiveData
-
-    init {
-        viewModelScope.launch {
-            val news = api.getNews()
-            newsLiveData.value = news
-        }
-    }
+    val news = repository.getNews().asLiveData()
 }
