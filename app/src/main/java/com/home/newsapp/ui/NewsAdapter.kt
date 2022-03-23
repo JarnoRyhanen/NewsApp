@@ -30,10 +30,11 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsComparator
             binding.apply {
                 Glide.with(itemView)
                     .load(news.imageUrl)
+                    .centerCrop()
                     .into(recyclerViewImage)
 
                 recyclerViewTitle.text = news.title
-                recyclerViewNewsSite.text = news.title
+                recyclerViewNewsSite.text = news.newsSite
             }
         }
     }
