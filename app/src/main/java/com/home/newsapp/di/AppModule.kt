@@ -1,6 +1,9 @@
 package com.home.newsapp.di
 
+import android.app.Application
+import androidx.room.Room
 import com.home.newsapp.api.NewsApi
+import com.home.newsapp.data.NewsDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +28,9 @@ object AppModule {
     fun provideNewsApi(retrofit: Retrofit): NewsApi =
         retrofit.create(NewsApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideDatabase(application: Application): NewsDataBase =
+        Room.databaseBuilder(application, NewsDataBase::class.java, "news_database")
+            .build()
 }
