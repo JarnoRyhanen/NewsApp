@@ -9,13 +9,16 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.home.newsapp.R
 import com.home.newsapp.data.News
+import com.home.newsapp.data.SortOrder
 import com.home.newsapp.databinding.FragmentNewsBinding
 import com.home.newsapp.util.Resource
 import com.home.newsapp.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnItemClickListener {
@@ -65,11 +68,11 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnItemClickLi
 
         return when (item.itemId) {
             R.id.action_sort_by_news_site -> {
-                viewModel.sortOrder.value = SortOrder.BY_NEWSSITE
+                viewModel.onSortOrderSelected(SortOrder.BY_NEWSSITE)
                 true
             }
             R.id.action_sort_by_title -> {
-                viewModel.sortOrder.value = SortOrder.BY_TITLE
+                viewModel.onSortOrderSelected(SortOrder.BY_TITLE)
                 true
             }
             else -> super.onOptionsItemSelected(item)
