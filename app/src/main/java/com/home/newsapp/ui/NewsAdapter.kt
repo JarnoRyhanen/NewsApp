@@ -49,7 +49,8 @@ class NewsAdapter(private val listener: OnItemClickListener) : ListAdapter<News,
                     .into(recyclerViewImage)
 
                 recyclerViewTitle.text = news.title
-                recyclerViewNewsSite.text = news.newsSite
+                recyclerViewNewsSite.text = news.newsSite +"  "  + news.publishedAt
+
             }
         }
     }

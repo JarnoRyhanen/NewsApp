@@ -81,10 +81,6 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnItemClickLi
                 viewModel.onSortOrderSelected(SortOrder.BY_TITLE)
                 true
             }
-            R.id.action_sort_by_date_created -> {
-                viewModel.onSortOrderSelected(SortOrder.BY_DATE)
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }

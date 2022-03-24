@@ -17,7 +17,6 @@ class NewsRepository @Inject constructor(
 ) {
     private val dao = dataBase.newsDao()
 
-
     fun getNews(searchQuery: MutableStateFlow<String>, preferencesFlow: Flow<FilterPreferences>) = networkBoundResource(
         query = {
             val newsFlow = combine(
