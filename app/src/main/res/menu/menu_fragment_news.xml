@@ -25,6 +25,10 @@
                 android:id="@+id/action_sort_by_news_site"
                 android:title="Sort by news site"
                 />
+            <item
+                android:id="@+id/action_sort_by_date_created"
+                android:title="Sort by Date"
+                />
         </menu>
     </item>
 

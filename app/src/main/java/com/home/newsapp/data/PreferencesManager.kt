@@ -48,5 +48,5 @@ private object PreferencesKeys {
 }
 
 enum class SortOrder {
-    BY_TITLE, BY_NEWSSITE
+    BY_TITLE, BY_NEWSSITE, BY_DATE
 }

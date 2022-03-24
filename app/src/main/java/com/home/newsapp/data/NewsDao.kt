@@ -14,6 +14,7 @@ interface NewsDao {
         when(sortOrder){
             SortOrder.BY_TITLE -> getNewsSortedByTitle(query)
             SortOrder.BY_NEWSSITE -> getNewsSortedByNewsSite(query)
+            SortOrder.BY_DATE -> getNewsSortedByDate()
         }
 
     @Query("Select * FROM news WHERE " +
@@ -23,6 +24,9 @@ interface NewsDao {
     @Query("Select * FROM news WHERE " +
             " newsSite LIKE '%' || :searchQuery ||'%'")
     fun getNewsSortedByNewsSite(searchQuery: String): Flow<List<News>>
+
+    @Query("Select * FROM news ORDER BY publishedAt ASC")
+    fun getNewsSortedByDate(): Flow<List<News>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNews(news: List<News>)
