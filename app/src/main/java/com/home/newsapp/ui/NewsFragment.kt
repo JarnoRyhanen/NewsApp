@@ -48,10 +48,6 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsAdapter.OnItemClickLi
     }
 
     override fun onItemClick(news: News) {
-        val openUrl = news.url
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(openUrl)
-        startActivity(intent)
-//        viewModel.onNewsClicked(news)
+        viewModel.onNewsClicked(news)
     }
 }

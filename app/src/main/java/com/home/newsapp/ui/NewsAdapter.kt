@@ -37,7 +37,6 @@ class NewsAdapter(private val listener: OnItemClickListener) : ListAdapter<News,
                         listener.onItemClick(news)
                     }
                 }
-
             }
         }
 

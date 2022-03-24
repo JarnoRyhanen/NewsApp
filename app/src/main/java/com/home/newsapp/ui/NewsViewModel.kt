@@ -1,23 +1,31 @@
 package com.home.newsapp.ui
 
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.home.newsapp.data.News
 import com.home.newsapp.data.NewsRepository
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    repository: NewsRepository,
-) : ViewModel() {
+    app: Application,
+    repository: NewsRepository
+) : AndroidViewModel(app) {
+
+    private val context = app.applicationContext
 
     val news = repository.getNews().asLiveData()
+
+    fun onNewsClicked(news: News) = viewModelScope.launch {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(news.url))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(context, intent, null)
+    }
 }

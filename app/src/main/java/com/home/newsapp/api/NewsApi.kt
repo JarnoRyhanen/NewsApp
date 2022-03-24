@@ -10,8 +10,6 @@ interface NewsApi {
         const val BASE_URL = "https://api.spaceflightnewsapi.net/v3/"
     }
 
-    @GET("articles")
+    @GET("articles/?_limit=500")
     suspend fun getNews(): List<News>
-
-
 }
