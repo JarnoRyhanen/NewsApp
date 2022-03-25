@@ -17,12 +17,12 @@ interface NewsDao {
             SortOrder.BY_NEWSSITE -> getNewsSortedByNewsSite(query)
         }
 
-    @Query("Select * FROM news WHERE " +
-            " title LIKE '%' || :searchQuery ||'%'")
+    @Query("SELECT * FROM news WHERE " +
+            " title LIKE '%' || :searchQuery ||'%' ORDER BY publishedAt DESC")
     fun getNewsSortedByTitle(searchQuery: String): Flow<List<News>>
 
-    @Query("Select * FROM news WHERE " +
-            " newsSite LIKE '%' || :searchQuery ||'%'")
+    @Query("SELECT * FROM news WHERE " +
+            " newsSite LIKE '%' || :searchQuery ||'%' ORDER BY publishedAt DESC")
     fun getNewsSortedByNewsSite(searchQuery: String): Flow<List<News>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
