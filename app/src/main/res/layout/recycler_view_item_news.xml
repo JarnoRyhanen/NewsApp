@@ -27,7 +27,7 @@
         android:ellipsize="end"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:text="U.S. government urged to address supply risks in the space secto"
+        tools:text="Title text"
         />
 
     <TextView

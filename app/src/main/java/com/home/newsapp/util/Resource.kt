@@ -1,7 +1,5 @@
 package com.home.newsapp.util
 
-import java.lang.Exception
-
 sealed class Resource<T>(
     val data: T? = null,
     val error: Throwable? = null

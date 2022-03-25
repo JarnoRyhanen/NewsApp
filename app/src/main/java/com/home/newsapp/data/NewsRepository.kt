@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
-private const val TAG = "NewsRepository"
-
 class NewsRepository @Inject constructor(
     private val api: NewsApi,
     private val dataBase: NewsDataBase
